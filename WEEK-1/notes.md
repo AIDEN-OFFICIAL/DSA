@@ -78,6 +78,21 @@ A way to analyze an algorithm’s efficiency as input size increases.
 | **O(2ⁿ)**    | Exponential   | Recursive Fibonacci        | Very slow                         |
 | **O(n!)**    | Factorial     | Permutation generation     | Extremely slow                    |
 
+---
+| Term | Meaning | Represents | Case |
+|------|----------|-------------|------|
+| **Big-O** | Maximum time | Upper bound | Worst case |
+| **Big-Ω** | Minimum time | Lower bound | Best case |
+| **Big-Θ** | Exact time | Tight bound | Average case |
+
+---
+
+✅ **In Short:**
+- **Big-O:** At most this slow  
+- **Big-Ω:** At least this fast  
+- **Big-Θ:** Exactly this rate
+
+---
 # 6. Learn the Concepts of Array
 
 ## 🧠 What is an Array?
@@ -441,3 +456,29 @@ Equal elements preserve their relative order after sorting
 | **Heap Sort**      | O(n log n) | O(n log n)   | O(n log n) | O(1)             | ❌      | ✅        | Uses a binary heap to repeatedly extract the max (or min). In-place but not stable.                                                     |
 
 
+# 🧩 Linked List
+
+## 🧠 Concept
+A **Linked List** is a linear data structure where elements, called **nodes**, are linked using **pointers**.  
+Each node contains:
+- **Data** — the value stored in the node.  
+- **Pointer(s)** — reference(s) to the next (and possibly previous) node(s).  
+
+Unlike arrays, linked lists do not store data in contiguous memory locations, allowing **dynamic memory allocation** and **efficient insertion/deletion**.
+
+---
+
+## 🧮 Time & Space Complexity
+
+| Operation | Singly Linked List | Doubly Linked List |
+|------------|--------------------|--------------------|
+| **Insertion (at beginning)** | O(1) | O(1) |
+| **Insertion (at end)** | O(n) | O(n) |
+| **Insertion (at specific position)** | O(n) | O(n) |
+| **Deletion (at beginning)** | O(1) | O(1) |
+| **Deletion (at end)** | O(n) | O(n) |
+| **Deletion (by value or position)** | O(n) | O(n) |
+| **Search** | O(n) | O(n) |
+| **Space Complexity** | O(n) | O(n) (extra pointer for `prev`) |
+
+---
