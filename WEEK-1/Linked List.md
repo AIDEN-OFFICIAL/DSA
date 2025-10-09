@@ -27,16 +27,7 @@ Used in stacks, queues, and basic data sequence implementations.
 
 ### 💻 Example Code (JavaScript)
 ```js
-// Node Creation
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
-
-// Linked List Class
-class LinkedList {
+class Linked {
   constructor() {
     this.head = null;
   }
@@ -45,34 +36,138 @@ class LinkedList {
     return this.head === null;
   }
 
-  // Insert at beginning
-  insertAtBeginning(data) {
+  // Insert at Beginning
+  insBeg(data) {
     let node = new Node(data);
-    node.next = this.head;
-    this.head = node;
+    if (this.isEmpty()) this.head = node;
+    else {
+      node.next = this.head;
+      this.head = node;
+    }
   }
 
-  // Insert at end
-  append(data) {
-    let node = new Node(data);
-    if (this.isEmpty()) {
-      this.head = node;
+  // Insert at Specific Index
+  insert(data, index) {
+    if (index < 1) {
+      console.log("Please insert a position more than 0");
       return;
     }
+    if (index === 1) {
+      this.insBeg(data);
+      return;
+    }
+
+    let node = new Node(data);
     let curr = this.head;
-    while (curr.next) curr = curr.next;
+    let count = 1;
+
+    while (curr && count < index - 1) {
+      curr = curr.next;
+      count++;
+    }
+
+    if (curr === null) {
+      console.log("Index out of limit");
+      return;
+    }
+
+    node.next = curr.next;
     curr.next = node;
   }
 
-  // Delete from beginning
-  deleteBeginning() {
-    if (this.isEmpty()) return;
+  // Insert at End
+  append(data) {
+    let node = new Node(data);
+    if (this.isEmpty()) this.head = node;
+    else {
+      let prev = this.head;
+      while (prev.next) prev = prev.next;
+      prev.next = node;
+    }
+  }
+
+  // Delete at Beginning
+  delBeg() {
+    if (this.isEmpty()) {
+      console.log("List is empty");
+      return;
+    }
     this.head = this.head.next;
   }
 
-  // Reverse the list
-  reverse() {
-    let prev = null, curr = this.head;
+  // Delete at End
+  delEnd() {
+    if (this.isEmpty()) {
+      console.log("The linked list is empty");
+      return;
+    }
+    let curr = this.head;
+    let prev = null;
+    while (curr.next) {
+      prev = curr;
+      curr = curr.next;
+    }
+    prev.next = null;
+  }
+
+  // Delete at Specific Position
+  delSpec(pos) {
+    if (this.isEmpty()) {
+      console.log("The linked list is empty");
+      return;
+    }
+    if (pos < 1) {
+      console.log("Enter a valid position");
+      return;
+    }
+    if (pos === 1) {
+      this.delBeg();
+      return;
+    }
+
+    let curr = this.head;
+    let prev = null;
+    let count = 1;
+    while (curr && count < pos) {
+      prev = curr;
+      curr = curr.next;
+      count++;
+    }
+
+    if (curr === null) {
+      console.log("Position out of bounds");
+      return;
+    }
+    prev.next = curr.next;
+  }
+
+  // Delete by Value
+  delValue(data) {
+    if (this.isEmpty()) {
+      console.log("The linked list is empty");
+      return;
+    }
+
+    let curr = this.head;
+    let prev = null;
+
+    while (curr && curr.data !== data) {
+      prev = curr;
+      curr = curr.next;
+    }
+
+    if (curr === null) {
+      console.log("Value not found");
+      return;
+    }
+
+    prev.next = curr.next;
+  }
+
+  // Reverse Linked List
+  listRev() {
+    let curr = this.head;
+    let prev = null;
     while (curr) {
       let next = curr.next;
       curr.next = prev;
@@ -82,25 +177,83 @@ class LinkedList {
     this.head = prev;
   }
 
-  // Print the list
+  // Find Value
+  find(data) {
+    let curr = this.head;
+    let count = 1;
+    while (curr && curr.data !== data) {
+      curr = curr.next;
+      count++;
+    }
+    if (!curr) console.log("Not found");
+    else console.log(`${data} found at position ${count}`);
+  }
+  //remove duplicates from the linked list
+  remDup(){
+      let curr= this.head
+      let track=1
+          for(let curr = this.head ; curr !=null;curr=curr.next){
+              let count=track
+          for(let check = curr.next ; check !=null;check=check.next){
+              
+            if(curr.data==check.data){
+                this.delSpec(count)
+                count--;
+            }
+                count++;
+          }
+          track++;
+          }
+      
+      }
+ 
+  // Print List
   print() {
-    let curr = this.head, result = "";
+    let curr = this.head;
+    let str = "";
     while (curr) {
-      result += `${curr.data} -> `;
+      str += `${curr.data} -> `;
       curr = curr.next;
     }
-    console.log(result + "null");
+    console.log(str + "null");
   }
 }
 
-// Example Usage
-let list = new LinkedList();
-list.insertAtBeginning(3);
-list.insertAtBeginning(2);
+// Create a new linked list
+let list = new Linked();
+
+// Insert nodes
+list.insBeg(10);
+list.insBeg(20);
+list.append(30);
+list.insert(25, 2);   // insert at position 2
+
+// Print list
+list.print(); // Output: 20 -> 25 -> 10 -> 30 -> null
+
+// Delete operations
+list.delBeg();  // Delete first element
+list.delEnd();  // Delete last element
+list.delSpec(2); // Delete node at position 2
+list.delValue(10); // Delete by value
+
+// Reverse the list
+list.listRev();
+
+// Find a value
+list.find(25);
+
+// Print final list
+list.print();
 list.append(5);
-list.print(); // 2 -> 3 -> 5 -> null
-list.reverse();
-list.print(); // 5 -> 3 -> 2 -> null
+list.append(5);
+list.append(5);
+list.append(1);
+list.append(6);
+list.append(5);
+list.remDup();
+list.print()
+
 ```
 
 ---
