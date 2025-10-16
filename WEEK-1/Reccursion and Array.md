@@ -8,3 +8,5 @@ It stores **elements of the same or different types** in a **contiguous memory b
 ```js
 let arr = [10, 20, 30, 40];
 ```
+## Array question and answers:
+
