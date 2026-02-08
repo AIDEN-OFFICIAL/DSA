@@ -100,3 +100,24 @@ Output: 5
 * Find first non-repeating character
 * Convert lowercase to uppercase without built-in functions
 * Find frequency of each character
+
+## Workouts
+
+Write a function to replace each alphabet in the given string with another alphabet occurring at the n-th position from each of them.
+```js
+let str = "my name is aiden"
+function change(s,n){
+    let ans=""
+    for(let i = 0 ; i < s.length;i++){
+        // ans+= s.charCodeAt(i)+n
+        let code = s.charCodeAt(i)+n
+        if(code>122){
+            code=(code-122)+97
+        }
+     ans+=String.fromCharCode(code)
+     
+    }
+    console.log(ans)
+}
+change(str,1)
+```
