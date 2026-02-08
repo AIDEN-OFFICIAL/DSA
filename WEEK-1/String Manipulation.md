@@ -4,12 +4,7 @@
 A **String** is a sequence of characters stored in a continuous memory location.
 
 Example:
-
-```
-"hello"
-"DSA"
-"12345"
-```
+"hello", "DSA", "12345"
 
 Strings are usually **immutable** in many languages (like Java, Python), meaning they cannot be changed directly; instead, new strings are created.
 
@@ -51,7 +46,12 @@ Output: "olleh"
 
 **Your Solution:**
 
-```
+```js
+function rev(s){
+    if(s.length==1)return s
+    return rev(s.slice(1))+s[0]
+}
+console.log(rev("AideN"))
 ```
 
 ---
@@ -70,7 +70,13 @@ Output: true
 
 **Your Solution:**
 
-```
+```js
+function pal(s,i=0,j=s.length-1){
+    if(i>=j)return console.log("the word is a palindrome")
+    if(s[i]!= s[j])return console.log("It is not a palindrome")
+    return pal(s,i+1,j-1)
+}
+pal("malayalam")
 ```
 
 ---
@@ -90,6 +96,15 @@ Output: 5
 **Your Solution:**
 
 ```
+function countVow (s){
+    let vow=['a','e','i','o','u']
+    let count=0
+    for(let i= 0 ; i < s.length;i++){
+        if(vow.includes(s[i]))count++
+    }
+    console.log("count:",count)
+}
+countVow("aiden")
 ```
 
 ---
@@ -103,7 +118,7 @@ Output: 5
 
 ## Workouts
 
-Write a function to replace each alphabet in the given string with another alphabet occurring at the n-th position from each of them.
+1. Write a function to replace each alphabet in the given string with another alphabet occurring at the n-th position from each of them.
 ```js
 let str = "my name is aiden"
 function change(s,n){
@@ -120,4 +135,35 @@ function change(s,n){
     console.log(ans)
 }
 change(str,1)
+
+```
+2. Remove spaces from a string
+
+```js
+function remSpace(s){
+    return console.log(s.split(" ").join(""))
+}
+remSpace("ed uc at ion")
+```
+3. Find the first non-repeating character
+
+```js
+function rep(s){
+    for(let i = 0 ; i <s.length;i++){
+        if(s.lastIndexOf(s[i])==i)return console.log("the first non repeating character:", s[i])
+    }
+}
+rep("axizdexnaides")
+```
+4. Convert lowercase to uppercase without built-in functions
+
+```js
+function conv(s){
+    let ans =""
+    for(let i = 0 ;i <s.length;i++){
+      ans+=(s[i]==" ")? " ":String.fromCharCode(s.charCodeAt(i)-32)
+    }
+    console.log(ans)
+}
+conv("aiden make it uppercase")
 ```
